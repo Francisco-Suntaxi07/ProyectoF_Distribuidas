@@ -9,27 +9,26 @@ import jakarta.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "USUARIO")
+@Table(name = "usuario")
 public class UserEntity implements Serializable {
 
     @Id
-    @NotEmpty
-    @Column(name = "ID_USUARIO")
+    @Column(name = "id_usuario")
     private String id;
 
-    @Column(name = "NOMBRE_USUARIO")
+    @Column(name = "nombre_usuario")
     private String name;
 
-    @Column(name = "USERNAME")
+    @Column(name = "username")
     private String username;
 
-    @Column(name = "CLAVE_USUARIO")
+    @Column(name = "clave_usuario")
     private String password;
 
-    @Column(name = "EMAIL_USUARIO")
+    @Column(name = "email_usuario")
     private String email;
 
-    @Column(name = "ROL_USUARIO")
+    @Column(name = "rol_usuario")
     private String role;
 
     public UserEntity() {

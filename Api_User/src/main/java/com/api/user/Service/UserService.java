@@ -27,7 +27,19 @@ public class UserService implements IUserService{
 
     @Override
     public UserEntity saveUser(UserEntity user) {
-        return userRepository.save(user);
+        try{
+            userRepository.insertUser(
+                    user.getName(),
+                    user.getUsername(),
+                    user.getPassword(),
+                    user.getEmail(),
+                    user.getRole()
+            );
+            return user;
+        }catch(Exception e){
+            System.out.println("ERROR al guardar un usaurio en la API: " + e.getMessage());
+            return user = new UserEntity();
+        }
     }
 
     @Override
