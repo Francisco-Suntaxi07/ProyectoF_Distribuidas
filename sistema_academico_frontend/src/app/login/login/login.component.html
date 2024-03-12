@@ -1,3 +1,33 @@
-<div class="container">
-    <button type="button" class="btn btn-outline-primary" (click)="openSignIn()">Iniciar Sesion</button>
-</div>
+<div class="background-container">
+    <form class="registration-form">
+      <h2>Registro de Usuario</h2>
+      <div class="form-group">
+        <label for="nombreApellido">Nombre y Apellido</label>
+        <input type="text" id="nombreApellido" name="nombreApellido" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="usuario">Usuario</label>
+        <input type="text" id="usuario" name="usuario" required>
+      </div>
+      <div class="form-group">
+        <label for="contraseña">Contraseña</label>
+        <input type="password" id="contraseña" name="contraseña" required>
+      </div>
+      <div class="form-group">
+        <label for="rol">Rol</label>
+        <select id="rol" name="rol" required>
+          <option value="admin">Docente</option>
+          <option value="usuario">Estudiante</option>
+        </select>
+      </div>
+      <button type="submit">Registrarse</button>
+      <p>
+        ¿Ya tienes una cuenta?
+        <button type="button" class="btn btn-outline-primary" (click)="openSignIn()">Iniciar Sesion</button>
+      </p>
+    </form>
+  </div>
