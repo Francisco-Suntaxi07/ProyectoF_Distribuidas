@@ -3,34 +3,23 @@
 /* Created on:     7/3/2024 20:44:21                            */
 /*==============================================================*/
 
-
 DROP TABLE IF EXISTS MATRICULA;
 DROP TABLE IF EXISTS REGISTRO;
 DROP TABLE IF EXISTS USUARIO;
 DROP TABLE IF EXISTS CURSO;
-DROP SEQUENCE IF EXISTS Sequence_Usuario_Id;
 DROP PROCEDURE IF EXISTS INSERTAR_USUARIO;
 DROP PROCEDURE IF EXISTS INSERTAR_MATRICULA;
 DROP PROCEDURE IF EXISTS INSERTAR_REGISTRO;
-
--- Crear la secuencia para generar el número automáticamente
-CREATE SEQUENCE Sequence_Usuario_Id 
-START WITH 1 INCREMENT BY 1;
-
--- Crear la secuencia para generar el número automáticamente para REGISTRO
-CREATE SEQUENCE Sequence_Registro_Id 
-START WITH 1 INCREMENT BY 1;
-
--- Crear la secuencia para generar el número automáticamente para MATRICULA
-CREATE SEQUENCE Sequence_Matricula_Id 
-START WITH 1 INCREMENT BY 1;
+DROP SEQUENCE IF EXISTS Sequence_Usuario_Id;
+DROP SEQUENCE IF EXISTS Sequence_Matricula_Id;
+DROP SEQUENCE IF EXISTS Sequence_Registro_Id;
 
 /*==============================================================*/
 /* Table: USUARIO                                               */
 /*==============================================================*/
 CREATE TABLE USUARIO (
    ID_USUARIO           VARCHAR(16)          NOT NULL,
-   NOMBRE_USUARIO       VARCHAR(32)          NULL,
+   NOMBRE_USUARIO       VARCHAR(40)          NULL,
    USERNAME             VARCHAR(16)          NULL,
    CLAVE_USUARIO        VARCHAR(16)          NULL,
    EMAIL_USUARIO        VARCHAR(32)          NULL,
@@ -67,8 +56,8 @@ CREATE TABLE MATRICULA (
 CREATE TABLE REGISTRO (
    ID_REGISTRO          VARCHAR(8)           NOT NULL,
    ID_USUARIO           VARCHAR(16)          NOT NULL,
-   NOMBRE_ESTUDIANTE    VARCHAR(32)          NULL,
-   NOMBRE_DOCENTE       VARCHAR(32)          NULL,
+   NOMBRE_ESTUDIANTE    VARCHAR(40)          NULL,
+   NOMBRE_DOCENTE       VARCHAR(40)          NULL,
    NOMBRE_CURSO         VARCHAR(32)          NULL,
    NOTA_TAREA           DECIMAL(4,2)         NULL,
    NOTA_PROYECTO        DECIMAL(4,2)         NULL,
@@ -77,84 +66,89 @@ CREATE TABLE REGISTRO (
    CONSTRAINT PK_REGISTRO PRIMARY KEY (ID_REGISTRO),
    CONSTRAINT FK_REGISTRO_USUARIO FOREIGN KEY (ID_USUARIO) REFERENCES USUARIO (ID_USUARIO) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
-GO
+
 
 /*==============================================================*/
 /* Funciones para el ID_USUARIO de la tabla USUARIO             */
 /*==============================================================*/
-
--- Crear una funci�n para generar el ID_USUARIO
-CREATE PROCEDURE INSERTAR_USUARIO
-    @NOMBRE_USUARIO VARCHAR(32),
-    @USERNAME VARCHAR(16),
-    @CLAVE_USUARIO VARCHAR(16),
-    @EMAIL_USUARIO VARCHAR(32),
-    @ROL_USUARIO VARCHAR(16)
-AS
+CREATE OR REPLACE FUNCTION insertar_usuario(
+    nombre_usuario VARCHAR(32),
+    username VARCHAR(16),
+    clave_usuario VARCHAR(16),
+    email_usuario VARCHAR(32),
+    rol_usuario VARCHAR(16)
+)
+RETURNS VOID AS $$
+DECLARE
+    id_usuario VARCHAR(16);
 BEGIN
-    DECLARE @ID VARCHAR(16)
-
-    -- Obtener el pr�ximo valor de la secuencia
-    SET @ID = 'L00' + RIGHT('000' + CAST(NEXT VALUE FOR Sequence_Usuario_Id AS VARCHAR(10)), 3)
+    -- Obtener el próximo valor de la secuencia y generar el ID
+    id_usuario := 'L00' || LPAD(NEXTVAL('sequence_usuario_id')::TEXT, 3, '0');
 
     -- Insertar el usuario con el ID generado
-    INSERT INTO USUARIO (ID_USUARIO, NOMBRE_USUARIO, USERNAME, CLAVE_USUARIO, EMAIL_USUARIO, ROL_USUARIO)
-    VALUES (@ID, @NOMBRE_USUARIO, @USERNAME, @CLAVE_USUARIO, @EMAIL_USUARIO, @ROL_USUARIO)
+    INSERT INTO usuario (id_usuario, nombre_usuario, username, clave_usuario, email_usuario, rol_usuario)
+    VALUES (id_usuario, nombre_usuario, username, clave_usuario, email_usuario, rol_usuario);
 END;
-GO
+$$ LANGUAGE plpgsql;
+
+-- Crear la secuencia para generar el número automáticamente
+CREATE SEQUENCE Sequence_Usuario_Id 
+START WITH 1 INCREMENT BY 1;
 
 /*==============================================================*/
 /* Funciones para el ID_MATRICULA de la tabla MATRICULA             */
 /*==============================================================*/
-
--- Crear una función para generar el ID_MATRICULA
-CREATE PROCEDURE INSERTAR_MATRICULA
-    @ID_CURSO VARCHAR(8),
-    @ID_USUARIO VARCHAR(16),
-    @FECHA_MATRICULA DATE
-AS
+CREATE OR REPLACE FUNCTION insertar_matricula(
+    id_curso VARCHAR(8),
+    id_usuario VARCHAR(16),
+    fecha_matricula DATE
+)
+RETURNS VOID AS $$
+DECLARE
+    id_matricula VARCHAR(8);
 BEGIN
-    DECLARE @ID_MATRICULA VARCHAR(8)
-
-    -- Obtener el próximo valor de la secuencia para MATRICULA
-    SET @ID_MATRICULA = 'M' + RIGHT('00000' + CAST(NEXT VALUE FOR Sequence_Matricula_Id AS VARCHAR(10)), 5)
+    -- Obtener el próximo valor de la secuencia y generar el ID
+    id_matricula := 'M00' || LPAD(NEXTVAL('sequence_matricula_id')::TEXT, 3, '0');
 
     -- Insertar la matrícula con el ID generado
-    INSERT INTO MATRICULA (ID_MATRICULA, ID_CURSO, ID_USUARIO, FECHA_MATRICULA)
-    VALUES (@ID_MATRICULA, @ID_CURSO, @ID_USUARIO, @FECHA_MATRICULA)
+    INSERT INTO matricula (id_matricula, id_curso, id_usuario, fecha_matricula)
+    VALUES (id_matricula, id_curso, id_usuario, fecha_matricula);
 END;
-GO
+$$ LANGUAGE plpgsql;
+
+-- Crear la secuencia para generar el número automáticamente para MATRICULA
+CREATE SEQUENCE Sequence_Matricula_Id 
+START WITH 1 INCREMENT BY 1;
+
 
 /*==============================================================*/
 /* Funciones para el ID_REGISTRO de la tabla REGISTRO             */
 /*==============================================================*/
-
--- Crear una función para generar el ID_REGISTRO
-CREATE PROCEDURE INSERTAR_REGISTRO
-    @ID_USUARIO VARCHAR(16),
-    @NOMBRE_ESTUDIANTE VARCHAR(32),
-    @NOMBRE_DOCENTE VARCHAR(32),
-    @NOMBRE_CURSO VARCHAR(32),
-    @NOTA_TAREA DECIMAL(4,2),
-    @NOTA_PROYECTO DECIMAL(4,2),
-    @NOTA_EXAMEN DECIMAL(4,2),
-    @ESTADO_ESTUDIANTE BIT
-AS
+CREATE OR REPLACE FUNCTION insertar_registro(
+    id_usuario VARCHAR(16),
+    nombre_estudiante VARCHAR(40),
+    nombre_docente VARCHAR(40),
+    nombre_curso VARCHAR(32),
+    nota_tarea DECIMAL(4,2),
+    nota_proyecto DECIMAL(4,2),
+    nota_examen DECIMAL(4,2),
+    estado_estudiante BIT
+)
+RETURNS VOID AS $$
+DECLARE
+    id_registro VARCHAR(8);
 BEGIN
-    DECLARE @ID_REGISTRO VARCHAR(8)
-
-    -- Obtener el próximo valor de la secuencia para REGISTRO
-    SET @ID_REGISTRO = 'R' + RIGHT('00000' + CAST(NEXT VALUE FOR Sequence_Registro_Id AS VARCHAR(10)), 5)
+    -- Obtener el próximo valor de la secuencia y generar el ID
+    id_registro := 'R00' || LPAD(NEXTVAL('sequence_registro_id')::TEXT, 3, '0');
 
     -- Insertar el registro con el ID generado
-    INSERT INTO REGISTRO (ID_REGISTRO, ID_USUARIO, NOMBRE_ESTUDIANTE, NOMBRE_DOCENTE, NOMBRE_CURSO, NOTA_TAREA, NOTA_PROYECTO, NOTA_EXAMEN, ESTADO_ESTUDIANTE)
-    VALUES (@ID_REGISTRO, @ID_USUARIO, @NOMBRE_ESTUDIANTE, @NOMBRE_DOCENTE, @NOMBRE_CURSO, @NOTA_TAREA, @NOTA_PROYECTO, @NOTA_EXAMEN, @ESTADO_ESTUDIANTE)
+    INSERT INTO registro (id_registro, id_usuario, nombre_estudiante, nombre_docente, nombre_curso, nota_tarea, nota_proyecto, nota_examen, estado_estudiante)
+    VALUES (id_registro, id_usuario, nombre_estudiante, nombre_docente, nombre_curso, nota_tarea, nota_proyecto, nota_examen, estado_estudiante);
 END;
-GO
+$$ LANGUAGE plpgsql;
 
-/*==============================================================*/
-/* Funciones para el ID_MATRICULA de la tabla MATRICULA             */
-/*==============================================================*/
-
+-- Crear la secuencia para generar el número automáticamente para REGISTRO
+CREATE SEQUENCE Sequence_Registro_Id 
+START WITH 1 INCREMENT BY 1;
 
 
