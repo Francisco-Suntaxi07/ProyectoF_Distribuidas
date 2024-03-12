@@ -12,7 +12,9 @@ SELECT insertar_usuario('MIREYA', 'mireya', '123', 'mireya@espe.edu.ec', 'PROFES
 SELECT insertar_usuario('DARIO JAVIER MORALES CAIZA', 'djmorales', '321', 'djmorales@espe.edu.ec', 'PROFESOR');
 SELECT insertar_usuario('LUIS XAVIER ESPINOSA MEZA', 'lxespinosa', '123', 'lxespinosa@espe.edu.ec', 'ESTUDIANTE');
 SELECT insertar_usuario('RICARDO SEBASTIAN GRIJALVA MOREJON', 'rsgrijalva', '123', 'rsgrijalva@espe.edu.ec', 'ESTUDIANTE');
+SELECT insertar_usuario('ALEJANDRO JOSUE TOSCANO TABOADA', 'ajtoscano', '123', 'ajtoscano@espe.edu.ec', 'ESTUDIANTE');
 COMMIT;
+
 
 select * from usuario;
 
