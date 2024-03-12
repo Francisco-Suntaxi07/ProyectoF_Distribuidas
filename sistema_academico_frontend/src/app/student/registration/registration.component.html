@@ -1,1 +1,34 @@
-<p>registration works!</p>
+<div class="login_bg">
+    <h1 mat-dialog-title class="title">MATRICULACIÓN</h1>
+  </div>
+  <br>
+  <div mat-dialog-content>
+    <fieldset formArrayName="campos">
+      <div *ngFor="let campo of camposControls; let i = index">
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="id-text" appearance="outline">
+              <mat-label>ID_MATERIA</mat-label>
+              <input matInput formControlName="id" name="id">
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="id-text" appearance="outline">
+              <mat-label>NOMBRE</mat-label>
+              <input matInput formControlName="id" name="id">
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="id-text" appearance="outline">
+              <mat-label>CUPOS</mat-label>
+              <input matInput formControlName="id" name="id">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+    <div class="button-container">
+        <button mat-raised-button color="warn" class="add-button" (click)="agregarCampos()">+ Agregar</button>
+      </div>
+  </div>
+  
