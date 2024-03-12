@@ -1,15 +1,27 @@
 <div class="background-container">
-    <form class="registration-form">
       <h2>INICIAR SESIÓN</h2>
-
-      <div class="form-group">
-        <label for="usuario">USUARIO</label>
-        <input type="text" id="usuario" name="usuario" required>
-      </div>
-      <div class="form-group">
-        <label for="contraseña">CONTRASEÑA</label>
-        <input type="password" id="contraseña" name="contraseña" required>
-      </div>
-      <button >INICIAR</button>
+      <form [formGroup]="formLogin" (ngSubmit)="signIn()" >
+        <div class="row">
+            <div class="col">
+                <mat-form-field appearance="outline">
+                    <mat-label>Usuario:</mat-label>
+                    <input matInput formControlName="username" maxlength="16" class="input-field">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <mat-form-field appearance="outline">
+                    <mat-label>Contraseña</mat-label>
+                    <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" maxlength="16" class="input-field">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col">
+                <button type="submit" class="login-btn" [disabled]="!isFormValid">Ingresar</button>
+            </div>
+        </div>
     </form>
+      
   </div>

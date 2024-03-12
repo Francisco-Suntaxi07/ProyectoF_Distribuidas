@@ -20,9 +20,15 @@
     text-align: center;
 }
 
-button.add-button {
+.boton-control {
     font-size: 0.9rem;
     padding: 0.2rem 1rem;
     border: none;
+    margin-right: 20px;
     border-radius: 8px;
 }
+
+.boton-control:hover {
+    background-color: black;
+    color: white;
+  }

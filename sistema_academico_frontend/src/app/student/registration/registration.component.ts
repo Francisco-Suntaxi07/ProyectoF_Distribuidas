@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 
@@ -32,5 +31,16 @@ export class RegistrationComponent implements OnInit {
       id: ['', Validators.required]
     }));
   }
-}
 
+  borrarCampo(index: number) {
+    const campos = this.form.get('campos') as FormArray;
+    campos.removeAt(index);
+  }
+
+  borrarTodasFilas() {
+    const campos = this.form.get('campos') as FormArray;
+    while (campos.length > 1) {
+      campos.removeAt(1);
+    }
+  }
+}

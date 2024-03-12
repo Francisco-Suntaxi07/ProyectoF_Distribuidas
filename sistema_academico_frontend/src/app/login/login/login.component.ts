@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { SignInComponent } from '../sign-in/sign-in.component';
+
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,12 +11,30 @@ import { SignInComponent } from '../sign-in/sign-in.component';
 })
 export class LoginComponent {
 
-  constructor(
-    public modal: MatDialog
-  ) { }
+  hide = true;
 
-  openSignIn() {
-    const dialogRef = this.modal.open(SignInComponent);
+  
+  private _formLogin: FormGroup = this._formBuilder.group({
+    username: ['', Validators.required],
+    password: ['', Validators.required]
+  });
+  
+  constructor (
+    private _formBuilder: FormBuilder,
+    private _router: Router
+  ){}
+
+  signIn(): void {
+    this._router.navigate(['app/inicio']);
+    
+  }
+
+  public get isFormValid(): boolean {
+    return this.formLogin.get('username')?.value && this.formLogin.get('password')?.value;
+  }
+
+  public get formLogin(): FormGroup {
+    return this._formLogin;
   }
 
 }
