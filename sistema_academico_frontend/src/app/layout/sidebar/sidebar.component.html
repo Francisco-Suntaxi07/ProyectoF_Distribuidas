@@ -1,9 +1,12 @@
-<mat-sidenav-container class="example-container example-c">
-    <mat-sidenav #sidenav mode="side" opened>
-        Sidenav content
+<mat-sidenav-container class="c-nav">
+    <mat-sidenav #sidenav mode="side" opened class="nav">
+        <mat-nav-list>
+            <a mat-list-item *ngFor="let item of menuItems || []" [routerLink]="item.route">
+            <span>{{item.label}}</span>
+            </a>
+        </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
-        <p>Main content</p>
-        <button mat-button >Toggle Sidenav</button>
+        <router-outlet></router-outlet>
     </mat-sidenav-content>
 </mat-sidenav-container>

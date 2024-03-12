@@ -24,7 +24,7 @@ export class SignInComponent {
   ){}
 
   signIn(): void {
-    this._router.navigate(['app']);
+    this._router.navigate(['app/inicio']);
     this.closeSignIn();
   }
 

@@ -7,6 +7,8 @@ import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
@@ -14,12 +16,14 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     LayoutComponent,
     FooterComponent,
     HeaderComponent,
-    SidebarComponent
+    SidebarComponent,
+    HomeComponent
   ],
   imports: [
     CommonModule,
     LayoutRoutingModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatListModule
   ]
 })
 export class LayoutModule { }

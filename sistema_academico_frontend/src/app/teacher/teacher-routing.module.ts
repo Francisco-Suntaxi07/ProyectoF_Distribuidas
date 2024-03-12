@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { GradesComponent } from './grades/grades.component';
 
 const routes: Routes = [
-  { path: 'grades', component: GradesComponent },
+  { path: 'calificaciones', component: GradesComponent },
 ];
 
 @NgModule({
