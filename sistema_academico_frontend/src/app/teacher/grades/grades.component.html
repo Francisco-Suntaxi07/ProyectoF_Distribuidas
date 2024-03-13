@@ -1,5 +1,5 @@
 <div class="login_bg">
-    <h1 mat-dialog-title class="title">BIENVENIDO {{this.user?.name}}</h1>
+    <h1 mat-dialog-title class="title">BIENVENIDO {{this.user.name}}</h1>
 </div>
 <br>
 <div mat-dialog-content>
@@ -7,13 +7,13 @@
         <div class="row">
             <mat-form-field class="col" appearance="outline">
                 <mat-label>Seleccione un Curso</mat-label>
-                <mat-select>
-                    <mat-option value="1">1</mat-option>
-                    <mat-option value="2">2</mat-option>
-                    <mat-option value="3">3</mat-option>
+                <mat-select [(ngModel)]="selectedCourse">
+                    <mat-option *ngFor="let course of listCoursesTeacher" [value]="course.name">
+                        {{ course.name }}
+                    </mat-option>
                 </mat-select>
             </mat-form-field>
-            <button  class="btn-bus">Buscar</button>
+            <button class="btn-bus" (click)="filterRecords()">Buscar</button>
         </div>
     </div>
 
@@ -28,6 +28,19 @@
                     <th scope="col">Acciones</th>
                 </tr>
             </thead>
+            <tbody>
+                <tr *ngFor="let record of filteredListRecords">
+                    <td>{{ record.nameStudent }}</td>
+                    <td>{{ record.gradeHomework }}</td>
+                    <td>{{ record.gradeProject }}</td>
+                    <td>{{ record.gradeExam }}</td>
+                    <td>
+                        <button mat-icon-button>
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
         </table>
     </div>
 </div>
