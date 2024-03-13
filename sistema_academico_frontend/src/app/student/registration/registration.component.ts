@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { CursoModel } from 'src/app/models/cursoModel';
+import { UsersModel } from 'src/app/models/userModel';
+import { AuthService } from 'src/app/services/auth.service';
 import { CursoService } from 'src/app/services/curso.service';
 
 @Component({
@@ -9,19 +11,24 @@ import { CursoService } from 'src/app/services/curso.service';
   styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent implements OnInit {
-
+  user: UsersModel = new UsersModel();
   form: FormGroup;
   datos: any[] = [];
   cursos: CursoModel[] = [];
   nombresCursosSeleccionados: string[] = []; 
+  numCupoSeleccionado: number[] = [];
 
-  constructor(private fb: FormBuilder, private cursoService: CursoService) {
+  constructor(private fb: FormBuilder, private cursoService: CursoService,private authService: AuthService,) {
     this.form = this.fb.group({
       campos: this.fb.array([])
     });
   }
 
   ngOnInit() {
+    const currentUser = this.authService.getCurrentUser();
+    if (currentUser !== null) {
+      this.user = currentUser;
+    }
     this.agregarCampos();
     this.obtenerCursos();
   }
@@ -34,6 +41,7 @@ export class RegistrationComponent implements OnInit {
     const campos = this.form.get('campos') as FormArray;
     campos.removeAt(index);
     this.nombresCursosSeleccionados.splice(index, 1);
+    this.numCupoSeleccionado.splice(index, 1);
   }
 
   borrarTodasFilas() {
@@ -41,6 +49,7 @@ export class RegistrationComponent implements OnInit {
     while (campos.length > 0) {
       campos.removeAt(0);
       this.nombresCursosSeleccionados.shift();
+      this.numCupoSeleccionado.shift();
     }
   }
 
@@ -52,6 +61,7 @@ export class RegistrationComponent implements OnInit {
       places: ['', Validators.required]
     }));
     this.nombresCursosSeleccionados.push('');
+    
   }
 
   obtenerCursos() {
@@ -68,6 +78,17 @@ export class RegistrationComponent implements OnInit {
       this.nombresCursosSeleccionados[index] = 'Curso no encontrado';
     }
   }
-  
+
+  mostrarCupo(selectedId: string | number, index: number) {
+    const curso = this.cursos.find(curso => curso.id === selectedId);
+    if (curso) {
+      this.numCupoSeleccionado[index] = curso.places !== undefined ? +curso.places : NaN; // Convertir a número o NaN si no se puede convertir
+      this.camposControls[index].get('places')?.setValue(curso.places !== undefined ? curso.places.toString() : '');
+    } else {
+      this.numCupoSeleccionado[index] = NaN; // Si el curso no se encuentra, asigna NaN
+      this.camposControls[index].get('places')?.setValue('Cupo no disponible');
+    }
+}
+
 
 }

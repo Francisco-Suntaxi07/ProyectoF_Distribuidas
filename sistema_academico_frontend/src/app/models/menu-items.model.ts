@@ -28,5 +28,10 @@ export const studentMenuItems: MenuItem[] = [
         route: "estudiante/matriculas",
         icon: "how_to_reg"
     },
+    {
+        label: "Notas",
+        route: "estudiante/notas",
+        icon: "monitor_weight"
+    },
 ]
 
