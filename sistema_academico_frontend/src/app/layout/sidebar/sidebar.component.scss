@@ -1,10 +1,13 @@
 .nav {
-    background-color: #cdcdcd;
+    background-color: #cccccc;
+    border: none;
+
 }
 .c-nav {
     background-color: #ffffff;
 }
 
 mat-sidenav-container {
-    height: 90vh;
+    height: 80vh;
+    border: none;
 }
