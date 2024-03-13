@@ -96,6 +96,7 @@ $$ LANGUAGE plpgsql;
 CREATE SEQUENCE Sequence_Usuario_Id 
 START WITH 1 INCREMENT BY 1;
 
+
 /*==============================================================*/
 /* Funciones para el ID_MATRICULA de la tabla MATRICULA             */
 /*==============================================================*/
