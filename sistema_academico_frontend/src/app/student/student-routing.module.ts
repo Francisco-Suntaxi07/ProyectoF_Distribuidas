@@ -6,7 +6,7 @@ import { ViewGradesComponent } from './view-grades/view-grades.component';
 
 const routes: Routes = [
   { path: 'matriculas', component: RegistrationComponent },
-  { path: 'notas', component: ViewGradesComponent },
+  { path: 'notas', component: GradesStudentComponent }
 ];
 
 @NgModule({

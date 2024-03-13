@@ -9,13 +9,13 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { ViewGradesComponent } from './view-grades/view-grades.component';
 
-
-
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     RegistrationComponent,
-    ViewGradesComponent
+    ViewGradesComponent,
+
 
   ],
   imports: [
@@ -24,7 +24,8 @@ import { ViewGradesComponent } from './view-grades/view-grades.component';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatOptionModule
+    MatOptionModule,
+    FormsModule
 
   ]
 })
