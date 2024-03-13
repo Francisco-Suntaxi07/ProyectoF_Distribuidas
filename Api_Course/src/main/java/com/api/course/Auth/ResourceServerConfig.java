@@ -20,8 +20,8 @@ public class ResourceServerConfig {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins( Collections.singletonList("http://localhost:4200"));
         configuration.setAllowedMethods(Arrays.asList("GET","POST","DELETE"));
-        configuration.setAllowCredentials(true);
-        configuration.setAllowedHeaders(Arrays.asList("Content-Type", "Authorization"));
+        //configuration.setAllowCredentials(true);
+        //configuration.setAllowedHeaders(Arrays.asList("Content-Type", "Authorization"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
