@@ -17,10 +17,6 @@ export class RegistrationComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.form = this.fb.group({
-      campos: this.fb.array([])
-    });
-
     this.agregarCampos();
   }
 
