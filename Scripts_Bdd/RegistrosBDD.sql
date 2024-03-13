@@ -52,11 +52,37 @@ select * from CURSO;
 DELETE FROM MATRICULA;
 
 BEGIN;
-SELECT insertar_matricula('15348', 'L00004', '2023-09-25');
-SELECT insertar_matricula('15360', 'L00004', '2023-09-25');
-SELECT insertar_matricula('15589', 'L00004', '2023-09-26');
-SELECT insertar_matricula('15591', 'L00004', '2023-09-27');
-SELECT insertar_matricula('15593', 'L00004', '2023-09-25');
+SELECT insertar_matricula('15348', 'L00008', '2023-09-25');
+SELECT insertar_matricula('15360', 'L00008', '2023-09-25');
+SELECT insertar_matricula('15589', 'L00008', '2023-09-26');
+SELECT insertar_matricula('15591', 'L00008', '2023-09-27');
+SELECT insertar_matricula('15593', 'L00008', '2023-09-25');
+SELECT insertar_matricula('15348', 'L00010', '2023-09-25');
+SELECT insertar_matricula('15360', 'L00010', '2023-09-25');
+SELECT insertar_matricula('15593', 'L00010', '2023-09-25');
+SELECT insertar_matricula('15348', 'L00014', '2023-09-29');
+
 COMMIT;
 
 select * from MATRICULA;
+
+
+/*==============================================================*/
+/* DATOS: REGISTRO                                              */
+/*==============================================================*/
+
+DELETE FROM REGISTRO;
+
+BEGIN;
+SELECT insertar_registro('L00008', 'LUIS XAVIER ESPINOSA MEZA', 'DARIO JAVIER MORALES CAIZA', 'APLICACIONES DISTRIBUIDAS', 8.5, 7.2, 9.0, TRUE);
+SELECT insertar_registro('L00008', 'LUIS XAVIER ESPINOSA MEZA', 'ANGEL GEOVANNY CUDCO POMAGUALLI', 'ASEG DE LA CALIDAD DE SOFTWARE', 2.5, 7.2, 1.0, FALSE);
+SELECT insertar_registro('L00008', 'LUIS XAVIER ESPINOSA MEZA', 'ANGEL GEOVANNY CUDCO POMAGUALLI', 'DESARROLLO DE SOFTWARE SEGURO', 7.5, 7.1, 7.0, TRUE);
+SELECT insertar_registro('L00008', 'LUIS XAVIER ESPINOSA MEZA', 'KLEBER AUGUSTO AGUILAR LEMA', 'DESARROLLO DE VIDEO JUEGOS', 2.5, 7.2, 1.0, FALSE);
+SELECT insertar_registro('L00008', 'LUIS XAVIER ESPINOSA MEZA', 'SANG GUUN YOO', 'ING. SEGURIDAD DEL SOFTWARE', 2.5, 7.2, 1.0, FALSE);
+SELECT insertar_registro('L00010', 'RICARDO SEBASTIAN GRIJALVA MOREJON', 'DARIO JAVIER MORALES CAIZA', 'APLICACIONES DISTRIBUIDAS', 8.5, 7.2, 9.0, TRUE);
+SELECT insertar_registro('L00010', 'RICARDO SEBASTIAN GRIJALVA MOREJON', 'ANGEL GEOVANNY CUDCO POMAGUALLI', 'ASEG DE LA CALIDAD DE SOFTWARE', 8.5, 7.2, 9.0, TRUE);
+SELECT insertar_registro('L00010', 'RICARDO SEBASTIAN GRIJALVA MOREJON', 'SANG GUUN YOO', 'ING. SEGURIDAD DEL SOFTWARE', 3.5, 6.9, 6.4, FALSE);
+SELECT insertar_registro('L00014', 'CAMILA PACHECO PACHECO', 'DARIO JAVIER MORALES CAIZA', 'APLICACIONES DISTRIBUIDAS', 7.5, 7.1, 7.0, TRUE);
+COMMIT;
+
+select * from REGISTRO;
