@@ -13,6 +13,7 @@ export class RegistrationComponent implements OnInit {
   form: FormGroup;
   datos: any[] = [];
   cursos: CursoModel[] = [];
+  nombresCursosSeleccionados: string[] = []; 
 
   constructor(private fb: FormBuilder, private cursoService: CursoService) {
     this.form = this.fb.group({
@@ -32,12 +33,14 @@ export class RegistrationComponent implements OnInit {
   borrarCampo(index: number) {
     const campos = this.form.get('campos') as FormArray;
     campos.removeAt(index);
+    this.nombresCursosSeleccionados.splice(index, 1);
   }
 
   borrarTodasFilas() {
     const campos = this.form.get('campos') as FormArray;
     while (campos.length > 0) {
       campos.removeAt(0);
+      this.nombresCursosSeleccionados.shift();
     }
   }
 
@@ -45,9 +48,10 @@ export class RegistrationComponent implements OnInit {
     const campos = this.form.get('campos') as FormArray;
     campos.push(this.fb.group({
       id: ['', Validators.required],
-      nombre: ['', Validators.required],
-      cupo: ['', Validators.required]
+      name: ['', Validators.required],
+      places: ['', Validators.required]
     }));
+    this.nombresCursosSeleccionados.push('');
   }
 
   obtenerCursos() {
@@ -55,5 +59,15 @@ export class RegistrationComponent implements OnInit {
       this.cursos = cursos;
     });
   }
+
+  mostrarNombre(selectedId: string | number, index: number) {
+    const curso = this.cursos.find(curso => curso.id === selectedId);
+    if (curso) {
+      this.nombresCursosSeleccionados[index] = curso.name || 'Nombre no disponible';
+    } else {
+      this.nombresCursosSeleccionados[index] = 'Curso no encontrado';
+    }
+  }
+  
 
 }

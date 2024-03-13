@@ -9,22 +9,25 @@
               <div class="col">
                 <mat-form-field class="id-text" appearance="outline">
                     <mat-label>ID_CURSO</mat-label>
-                    <mat-select formControlName="id" name="id">
+                    <mat-select formControlName="id" name="id" (selectionChange)="mostrarNombre($event.value, i)">
                         <mat-option *ngFor="let curso of cursos" [value]="curso.id">{{ curso.id }}</mat-option>
                     </mat-select>
                 </mat-form-field>
                 
               </div>
               <div class="col">
-                  <mat-form-field class="id-text" appearance="outline">
-                      <mat-label>NOMBRE</mat-label>
-                      <input matInput formControlName="nombre" name="nombre">
-                  </mat-form-field>
+                <mat-form-field class="id-text" appearance="outline">
+                    <mat-label>NOMBRE</mat-label>
+                    <input matInput formControlName="name" name="name" [value]="nombresCursosSeleccionados[i]" [disabled]="nombresCursosSeleccionados[i] !== ''">
+                </mat-form-field>
+                
+                
+                
               </div>
               <div class="col">
-                  <mat-form-field class="id-text" appearance="outline">
-                      <mat-label>CUPOS</mat-label>
-                      <input matInput formControlName="cupo" name="cupo">
+                <mat-form-field class="id-text" appearance="outline">
+                    <mat-label>CUPOS</mat-label>
+                    <input matInput formControlName="places" name="places">
                   </mat-form-field>
               </div>
               <div class="col">
@@ -40,7 +43,7 @@
             <button mat-raised-button color="warn" class="boton-control" (click)="agregarCampos()">+ Agregar</button>
         </div>
         <div class="col text-center">
-            <button mat-raised-button color="warn" class="boton-control">Registrar</button>
+            <button mat-raised-button color="warn" class="boton-control" >Registrar</button>
         </div>
         <div class="col text-right">
             <button mat-raised-button color="warn" class="boton-control" (click)="borrarTodasFilas()">Borrar todas</button>
