@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { CursoModel } from 'src/app/models/cursoModel';
+import { CursoService } from 'src/app/services/curso.service';
 
 @Component({
   selector: 'app-registration',
@@ -10,7 +12,9 @@ export class RegistrationComponent implements OnInit {
 
   form: FormGroup;
   datos: any[] = [];
-  constructor(private fb: FormBuilder) {
+  cursos: CursoModel[] = [];
+
+  constructor(private fb: FormBuilder, private cursoService: CursoService) {
     this.form = this.fb.group({
       campos: this.fb.array([])
     });
@@ -18,6 +22,7 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit() {
     this.agregarCampos();
+    this.obtenerCursos();
   }
 
   get camposControls() {
@@ -45,6 +50,10 @@ export class RegistrationComponent implements OnInit {
     }));
   }
 
-
+  obtenerCursos() {
+    this.cursoService.findAll().subscribe(cursos => {
+      this.cursos = cursos;
+    });
+  }
 
 }

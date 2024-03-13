@@ -7,10 +7,13 @@
       <div *ngFor="let campo of camposControls; let i = index; let isFirstRow = first">
           <div class="row">
               <div class="col">
-                  <mat-form-field class="id-text" appearance="outline">
-                      <mat-label>ID_CURSO</mat-label>
-                      <input matInput formControlName="id" name="id">
-                  </mat-form-field>
+                <mat-form-field class="id-text" appearance="outline">
+                    <mat-label>ID_CURSO</mat-label>
+                    <mat-select formControlName="id" name="id">
+                        <mat-option *ngFor="let curso of cursos" [value]="curso.id">{{ curso.id }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                
               </div>
               <div class="col">
                   <mat-form-field class="id-text" appearance="outline">
