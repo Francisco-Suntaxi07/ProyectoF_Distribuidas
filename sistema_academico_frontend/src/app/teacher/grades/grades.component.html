@@ -35,7 +35,7 @@
                     <td>{{ record.gradeProject }}</td>
                     <td>{{ record.gradeExam }}</td>
                     <td>
-                        <button mat-icon-button>
+                        <button mat-icon-button (click)="openForm(record)">
                             <mat-icon>edit</mat-icon>
                         </button>
                     </td>

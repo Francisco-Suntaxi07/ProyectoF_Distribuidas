@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { CursoModel } from 'src/app/models/cursoModel';
 import { RecordModel } from 'src/app/models/recordModel';
 import { UsersModel } from 'src/app/models/userModel';
 import { AuthService } from 'src/app/services/auth.service';
 import { CursoService } from 'src/app/services/curso.service';
 import { RecordService } from 'src/app/services/record.service';
+import { RecordFormComponent } from './record-form/record-form.component';
 
 @Component({
   selector: 'app-grades',
@@ -26,7 +28,8 @@ export class GradesComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private recordService: RecordService,
-    private courseService: CursoService
+    private courseService: CursoService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -84,6 +87,16 @@ export class GradesComponent implements OnInit {
         this.filteredListRecords.push(this.listRecordsTeacher[i]);
       }
     }
+  }
+
+  openForm(record: RecordModel): void {
+    const dialogRef = this.dialog.open(RecordFormComponent, {
+      data: record,
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 
 }

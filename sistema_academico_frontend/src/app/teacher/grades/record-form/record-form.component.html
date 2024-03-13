@@ -1,1 +1,38 @@
-<p>record-form works!</p>
+<h1 mat-dialog-title>Registro del estudiante:</h1>
+<div mat-dialog-content>
+  <p>{{data.nameStudent}}</p>
+  <form [formGroup]="formRecord" >
+    <div class="row">
+      <div class="col">
+        <mat-form-field appearance="outline">
+          <mat-label>Nota de Deberes: </mat-label>
+          <input matInput formControlName="gradeHomework" name="gradeHomework" type="number" step="0.01" min="0" max="20">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <mat-form-field appearance="outline">
+          <mat-label>Nota de Proyecto:</mat-label>
+          <input matInput formControlName="gradeProject" name="gradeProject" type="number" step="0.01" min="0" max="20">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <mat-form-field appearance="outline">
+          <mat-label>Nota de Examen:</mat-label>
+          <input matInput formControlName="gradeExam" name="gradeExam" type="number" step="0.01" min="0" max="20">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col text-center">
+          <button type="button" class="btn btn-outline-primary" (click)="saveForm()">Guardar</button>
+      </div>
+  </div>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-stroked-button (click)="closeForm()">Cerrar</button>
+</div>
