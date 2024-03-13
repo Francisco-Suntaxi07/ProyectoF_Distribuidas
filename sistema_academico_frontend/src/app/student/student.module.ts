@@ -8,7 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { ViewGradesComponent } from './view-grades/view-grades.component';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
@@ -25,7 +25,8 @@ import { FormsModule } from '@angular/forms';
     MatInputModule,
     MatSelectModule,
     MatOptionModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
 
   ]
 })

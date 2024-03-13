@@ -79,16 +79,6 @@ export class RegistrationComponent implements OnInit {
     }
   }
 
-  mostrarCupo(selectedId: string | number, index: number) {
-    const curso = this.cursos.find(curso => curso.id === selectedId);
-    if (curso) {
-      this.numCupoSeleccionado[index] = curso.places !== undefined ? +curso.places : NaN; // Convertir a número o NaN si no se puede convertir
-      this.camposControls[index].get('places')?.setValue(curso.places !== undefined ? curso.places.toString() : '');
-    } else {
-      this.numCupoSeleccionado[index] = NaN; // Si el curso no se encuentra, asigna NaN
-      this.camposControls[index].get('places')?.setValue('Cupo no disponible');
-    }
-}
 
 
 }
