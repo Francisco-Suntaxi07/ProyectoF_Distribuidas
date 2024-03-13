@@ -31,7 +31,7 @@ export const studentMenuItems: MenuItem[] = [
     {
         label: "Notas",
         route: "estudiante/notas",
-        icon: "monitor_weight"
+        icon: "note_alt"
     },
 ]
 

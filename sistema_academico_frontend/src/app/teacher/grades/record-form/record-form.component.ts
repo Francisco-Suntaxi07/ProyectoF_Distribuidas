@@ -43,6 +43,7 @@ export class RecordFormComponent implements OnInit{
     this._record.gradeHomework = this._formRecord.get('gradeHomework')?.value;
     this._record.gradeProject = this._formRecord.get('gradeProject')?.value;
     this._record.gradeExam = this._formRecord.get('gradeExam')?.value;
+    console.log(this._record);
 
   }
 
