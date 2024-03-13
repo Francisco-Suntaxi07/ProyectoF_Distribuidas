@@ -46,6 +46,16 @@ public class RecordService implements IRecordService{
     }
 
     @Override
+    public RecordEntity updateRecord(RecordEntity record) {
+        try{
+            return recordRepository.save(record);
+        } catch(Exception e){
+            System.out.println("Error al actualizar: " + e.getMessage());
+            return null;
+        }
+    }
+
+    @Override
     public boolean deleteRecordById(String id) {
         try {
             recordRepository.deleteById(id);

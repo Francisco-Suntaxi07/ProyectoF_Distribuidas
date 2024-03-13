@@ -10,6 +10,7 @@ public interface IRecordService {
     public List<RecordEntity> findAllRecords();
     public Optional<RecordEntity> findRecordById(String id);
     public RecordEntity saveRecord(RecordEntity record);
+    public RecordEntity updateRecord(RecordEntity record);
     public boolean deleteRecordById(String id);
 
 }

@@ -44,6 +44,31 @@ public class RecordRestController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+    @PutMapping("/records/update/{id}")
+    public ResponseEntity<?> updateRecord(@PathVariable String id, @RequestBody RecordEntity record){
+        Optional<RecordEntity> existingRecordOptional = recordService.findRecordById(id);
+        if (existingRecordOptional.isPresent()) {
+            RecordEntity existingRecord = existingRecordOptional.get();
+            existingRecord.setIdUser(record.getIdUser());
+            existingRecord.setNameStudent(record.getNameStudent());
+            existingRecord.setNameTeacher(record.getNameTeacher());
+            existingRecord.setNameCourse(record.getNameCourse());
+            existingRecord.setGradeHomework(record.getGradeHomework());
+            existingRecord.setGradeProject(record.getGradeProject());
+            existingRecord.setGradeExam(record.getGradeExam());
+            existingRecord.setStatus(record.getStatus());
+
+            RecordEntity response = recordService.updateRecord(existingRecord);
+            if (response != null) {
+                return ResponseEntity.ok(response);
+            } else {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al actualizar el registro");
+            }
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @DeleteMapping("/records/delete/{id}")
     public ResponseEntity<?> deleteUserById(@PathVariable String id){
         boolean response = recordService.deleteRecordById(id);
