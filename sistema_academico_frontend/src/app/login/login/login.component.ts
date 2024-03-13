@@ -37,10 +37,9 @@ export class LoginComponent {
         next: (userData) => {
           if (userData.id === id && userData.password === password) {
             this.snackBar.open("✅ Bienvenido " + userData.name, "Cerrar", {
-              duration: 2000
+              duration: 3000
             });
             this._authService.login(userData);
-            console.log(this._authService.getCurrentUser())
             switch (userData.role) {
               case 'PROFESOR':
                 this._router.navigate(['app/inicio']);

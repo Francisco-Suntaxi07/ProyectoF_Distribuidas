@@ -9,6 +9,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { HomeComponent } from './home/home.component';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { HomeComponent } from './home/home.component';
     CommonModule,
     LayoutRoutingModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    MatIconModule
   ]
 })
 export class LayoutModule { }

@@ -8,15 +8,13 @@ import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 })
 export class RegistrationComponent implements OnInit {
 
-   form: FormGroup;
+  form: FormGroup;
   datos: any[] = [];
-  constructor(private fb: FormBuilder) { 
+  constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
       campos: this.fb.array([])
     });
   }
-
-
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -52,5 +50,5 @@ export class RegistrationComponent implements OnInit {
   }
 
 
-  
+
 }
