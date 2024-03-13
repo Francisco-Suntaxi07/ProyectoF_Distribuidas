@@ -17,7 +17,7 @@ export class LoginComponent {
   hide = true;
 
   private _formLogin: FormGroup = this._formBuilder.group({
-    id: ['', Validators.required],
+    id: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]*$/)]],
     password: ['', Validators.required]
   });
 
@@ -75,6 +75,28 @@ export class LoginComponent {
   public get formLogin(): FormGroup {
     return this._formLogin;
   }
+  deshabilitarSimbolosYNumeros(event: KeyboardEvent) {
+    const inputChar = String.fromCharCode(event.charCode);
+    const pattern = /[A-Za-z\s]/;
+    if (!pattern.test(inputChar)) {
+      event.preventDefault();
+    }
+  }
 
+  deshabilitarSimbolos(event: KeyboardEvent) {
+    const charCode = event.which || event.keyCode;
+    const specialChars = [33, 64, 35, 36, 37, 94, 38, 42, 40, 41, 95, 43, 61, 91, 93, 123, 125, 92, 124, 59, 58, 34, 39, 60, 62, 47, 63];    if (specialChars.includes(charCode) && charCode !== 38) {
+        event.preventDefault();
+    }
+}
+
+
+deshabilitarLetrasYSimbolos(event: KeyboardEvent) {
+  const charCode = event.which || event.keyCode;
+  const validChars = [48, 49, 50, 51, 52, 53, 54, 55, 56, 57];
+  if (!validChars.includes(charCode)) {
+      event.preventDefault();
+  }
+}
 
 }
