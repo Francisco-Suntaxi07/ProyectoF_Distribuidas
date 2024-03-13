@@ -27,4 +27,8 @@ export class RecordService {
   delete(id?: string): Observable<any> {
     return this.http.delete<any>(`${this.urlEndPoint}/delete/${id}`);
   }
+
+  update(record: RecordModel): Observable<any> {
+    return this.http.put<any>(`${this.urlEndPoint}/update/${record.id}`, record);
+  }
 }
