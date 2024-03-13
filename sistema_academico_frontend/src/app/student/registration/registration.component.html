@@ -1,36 +1,48 @@
 <div class="login_bg">
-    <h1 mat-dialog-title class="title">BIENVENIDO ....</h1>
-  </div>
-  <br>
-  <div mat-dialog-content>
-    <fieldset formArrayName="campos">
-      <div *ngFor="let campo of camposControls; let i = index">
-        <div class="row">
-          <div class="col">
-            <mat-form-field class="id-text" appearance="outline">
-              <mat-label>ID_CURSO</mat-label>
-              <input matInput formControlName="id" name="id">
-            </mat-form-field>
+  <h1 mat-dialog-title class="title">BIENVENIDO ....</h1>
+</div>
+<br>
+<div mat-dialog-content>
+  <fieldset formArrayName="campos">
+      <div *ngFor="let campo of camposControls; let i = index; let isFirstRow = first">
+          <div class="row">
+              <div class="col">
+                  <mat-form-field class="id-text" appearance="outline">
+                      <mat-label>ID_CURSO</mat-label>
+                      <input matInput formControlName="id" name="id">
+                  </mat-form-field>
+              </div>
+              <div class="col">
+                  <mat-form-field class="id-text" appearance="outline">
+                      <mat-label>NOMBRE</mat-label>
+                      <input matInput formControlName="nombre" name="nombre">
+                  </mat-form-field>
+              </div>
+              <div class="col">
+                  <mat-form-field class="id-text" appearance="outline">
+                      <mat-label>CUPOS</mat-label>
+                      <input matInput formControlName="cupo" name="cupo">
+                  </mat-form-field>
+              </div>
+              <div class="col">
+                  <button class="boton-borrar1" mat-icon-button color="warn" (click)="borrarCampo(i)"
+                      *ngIf="!isFirstRow">Borrar</button>
+              </div>
           </div>
-          <div class="col">
-            <mat-form-field class="id-text" appearance="outline">
-              <mat-label>NOMBRE</mat-label>
-              <input matInput formControlName="id" name="id">
-            </mat-form-field>
-          </div>
-          <div class="col">
-            <mat-form-field class="id-text" appearance="outline">
-              <mat-label>CUPOS</mat-label>
-              <input matInput formControlName="id" name="id">
-            </mat-form-field>
-            <button class="boton-borrar1" *ngIf="i > 0" mat-icon-button color="warn" (click)="borrarCampo(i)">Borrar</button>
-          </div>
-        </div>
       </div>
-    </fieldset>
-    <div class="button-container">
-      <button mat-raised-button color="warn" class="boton-control" (click)="agregarCampos()">+ Agregar</button>
-      <button mat-raised-button color="warn" class="boton-control" (click)="borrarTodasFilas()">Borrar todas</button>
+  </fieldset>
+  <div class="button-container">
+    <div class="row">
+        <div class="col">
+            <button mat-raised-button color="warn" class="boton-control" (click)="agregarCampos()">+ Agregar</button>
+        </div>
+        <div class="col text-center">
+            <button mat-raised-button color="warn" class="boton-control">Registrar</button>
+        </div>
+        <div class="col text-right">
+            <button mat-raised-button color="warn" class="boton-control" (click)="borrarTodasFilas()">Borrar todas</button>
+        </div>
     </div>
-  </div>
-  
+</div>
+
+</div>

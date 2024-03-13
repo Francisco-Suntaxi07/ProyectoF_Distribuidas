@@ -7,29 +7,27 @@ import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
   styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent implements OnInit {
-  form: FormGroup;
+
+   form: FormGroup;
+  datos: any[] = [];
   constructor(private fb: FormBuilder) { 
     this.form = this.fb.group({
       campos: this.fb.array([])
     });
   }
 
+
+
   ngOnInit() {
     this.form = this.fb.group({
       campos: this.fb.array([])
     });
+
     this.agregarCampos();
   }
 
   get camposControls() {
     return (this.form.get('campos') as FormArray).controls;
-  }
-
-  agregarCampos() {
-    const campos = this.form.get('campos') as FormArray;
-    campos.push(this.fb.group({
-      id: ['', Validators.required]
-    }));
   }
 
   borrarCampo(index: number) {
@@ -39,8 +37,20 @@ export class RegistrationComponent implements OnInit {
 
   borrarTodasFilas() {
     const campos = this.form.get('campos') as FormArray;
-    while (campos.length > 1) {
-      campos.removeAt(1);
+    while (campos.length > 0) {
+      campos.removeAt(0);
     }
   }
+
+  agregarCampos() {
+    const campos = this.form.get('campos') as FormArray;
+    campos.push(this.fb.group({
+      id: ['', Validators.required],
+      nombre: ['', Validators.required],
+      cupo: ['', Validators.required]
+    }));
+  }
+
+
+  
 }
